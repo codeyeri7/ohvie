@@ -26,20 +26,19 @@ const routes = [
     name: 'Login',
     component: Login,
   },
-
   {
-    path: '/reviewcreate',
-    name: 'ReviewCreate',
+    path: '/articlecreate',
+    name: 'ArticleCreate',
     component: CreateView
   },
   {
-    path: '/reviewlist',
-    name: 'ReviewList',
+    path: '/articlelist',
+    name: 'ArticleList',
     component: ListView
   },
   {
-    path: '/reviewdetail',
-    name: 'ReviewDetail',
+    path: '/articledetail',
+    name: 'ArticleDetail',
     component: DetailView
   }
 ]

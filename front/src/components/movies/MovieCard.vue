@@ -32,7 +32,6 @@
           <hr>
           <h5 style="margin-bottom:10px" class="title-font">영화 제목 : {{ movie.title }}</h5>
           <h5 style="margin-bottom:10px" class="content-font">평점 : {{ movie.vote_average }}점</h5>
-          <h5 style="margin-bottom:10px" class="content-font">상영 시간 : {{ movie.runtime }}분</h5>
           <h5 style="margin-bottom:10px" class="content-font">개봉 일자 : {{ movie.release_date }}</h5>
           <h5 style="margin-bottom:10px" class="content-font">좋아요 {{ numLike }}개</h5>
           <hr>
@@ -43,13 +42,13 @@
           <hr>
           {{ movie.book_title }}
           <hr>
-          
           <a v-bind:href="movie.book_link">책좀 사볼까</a>
-
         </v-card-text>
 
         <v-divider></v-divider>
-
+        <MovieReview 
+          :movie="movie"
+        />
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
@@ -66,16 +65,16 @@
 </template>
 
 <script>
+import MovieReview from '@/components/movies/MovieReview'
 import axios from 'axios'
 import VueJwtDecode from "vue-jwt-decode"
-import DRF from '@/api/drf'
-
-
-// const SERVER_URL = process.env.VUE_APP_SERVER_URL
 
 
 export default {
   name: 'MovieCard',
+  components: {
+    MovieReview
+  },
   props: {
     movie: Object,
   },
@@ -117,7 +116,7 @@ export default {
       const hash = localStorage.getItem('jwt')
       // console.log(VueJwtDecode.decode(hash))
       const info = VueJwtDecode.decode(hash)
-      axios.post(`${DRF.URL}/accounts/myprofile/`, info, config)
+      axios.post(`http:127.0.0.1:8000/accounts/myprofile/`, info, config)
       .then( (res) => {
         // console.log(res.data)
         this.me = res.data
@@ -138,7 +137,7 @@ export default {
         myId: this.me.id,
         movieId: this.movie.id,
       }
-      axios.post(`${DRF.URL}/movies/${this.me.id}/${this.movie.title}/like/`, item, config)
+      axios.post(`http:127.0.0.1:8000/movies/${this.me.id}/${this.movie.title}/like/`, item, config)
       .then( () => {
         this.getMyName()
         this.check()

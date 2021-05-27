@@ -13,12 +13,12 @@ export default new Vuex.Store({
   state: {
     allMovies: [],
     eachMovie: {},
-    reviews: [],
+    // reviews: [],
   },
   getters: {
-    reviews(state) {
-      return state.reviews
-    }
+    // reviews(state) {
+    //   return state.reviews
+    // }
   //   imageUrl: (state) => "https://image.tmdb.org/t/p/w500" + state.eachMovie,
   },
 

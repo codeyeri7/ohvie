@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ReviewList />
+    <ArticleList />
     <v-btn
         elevation="2"
         rounded
@@ -14,16 +14,16 @@
 </template>
 
 <script>
-import ReviewList from '../../components/community/ReviewList.vue'
+import ArticleList from '../../components/community/ArticleList.vue'
 
 export default {
   name: 'ListView',
   components: {
-    ReviewList
+    ArticleList
   },
   methods: {
     movePage () {
-      this.$router.push({name: 'ReviewCreate'})
+      this.$router.push({ name: 'ArticleCreate' })
     }
   }
 }
