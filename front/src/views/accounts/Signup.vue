@@ -1,19 +1,35 @@
 <template>
-  <div>
-    <h1>Signup</h1>
-    <div>
-      <label for="username">사용자 이름: </label>
-      <input type="text" id="username" v-model="credentials.username">
-    </div>
-    <div>
-      <label for="password">비밀번호: </label>
-      <input type="password" id="password" v-model="credentials.password">
-    </div>
-    <div>
-      <label for="passwordConfirmation">비밀번호 확인: </label>
-      <input type="password" id="passwordConfirmation" v-model="credentials.passwordConfirmation">
-    </div>
-    <button @click="signup(credentials)">회원가입</button>
+  <div id="app">
+    <v-container>
+      <v-layout row class="text-xs-center">
+        <v-flex xs4 class="white lighten-4">
+          <v-container style="position: relative; top: 20%; left: 100%;" class="text-xs-center">
+            <v-card flat>
+              <v-card-title primary-title>
+                <h4>Signup</h4>
+              </v-card-title>
+              <v-form>
+               <input type="text" placeholder="username" id="username" v-model="credentials.username" v-text-field prepend-icon="person" name="Username" label="Username" />
+              <div>
+                  -----------------------------------------------
+              </div>
+              <input type="password" placeholder="password" id="password" v-model="credentials.password" v-text-field prepend-icon="lock" name="Password" label="Password" />
+              <div>
+               <div>
+                  -----------------------------------------------
+              </div>
+                <input type="password" placeholder="passwordConfirmation" id="passwordConfirmation" v-model="credentials.passwordConfirmation">
+              </div>
+              <!-- <button @click="signup(credentials)">회원가입</button> -->
+              <v-card-actions>
+                <v-btn @click="signup(credentials)" primary large block>회원가입</v-btn>
+              </v-card-actions>
+              </v-form>
+            </v-card>
+          </v-container>
+        </v-flex>
+      </v-layout>
+    </v-container>
   </div>
 </template>
 

@@ -3,27 +3,27 @@ from .models import Article, Comment, Review, ReviewComment
 
 # 전체 Article 게시판
 class ArticleListSerializer(serializers.ModelSerializer):
-    # userName = serializers.SerializerMethodField()
+    userName = serializers.SerializerMethodField()
 
-    # def get_userName(self,obj):
-    #     return obj.user.username
+    def get_userName(self,obj):
+        return obj.user.username
 
     class Meta:
         model = Article
-        # fields = ('id', 'user', 'title', 'content', 'created_at', 'updated_at',)
-        fields = ('id', 'title')
-        # read_only_fields = ('user',)
+        fields = ('id', 'user', 'userName', 'title', 'content','created_at', 'updated_at',)
+        # fields = ('id', 'title')
+        read_only_fields = ('user',)
 
 # 단일 댓글 및 입력
 class CommentSerializer(serializers.ModelSerializer):
-    # userName = serializers.SerializerMethodField()
-    # def get_userName(self,obj):
-    #     return obj.user.username
+    userName = serializers.SerializerMethodField()
+    def get_userName(self,obj):
+        return obj.user.username
     class Meta:
         model = Comment
-        # fields = ('id', 'user', 'content', 'created_at', 'updated_at', 'article',)
-        fields = ('id', 'content')
-        # read_only_fields = ('user','article',)
+        fields = ('id', 'user', 'content', 'userName', 'created_at', 'updated_at', 'article',)
+        # fields = ('id', 'content')
+        read_only_fields = ('user','article',)
 
 # 전체 댓글
 class CommentListSerializer(serializers.ModelSerializer):
@@ -31,36 +31,36 @@ class CommentListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = ('content')
-        # read_only_fields = ('article',)
+        read_only_fields = ('article',)
 
 # 전체 리뷰
 class ReviewListSerializer(serializers.ModelSerializer):
   movie_title = serializers.SerializerMethodField()
 
-#   def get_movie_title(self, obj):
-#     return obj.movie.title
+  def get_movie_title(self, obj):
+    return obj.movie.title
 
-#   userName = serializers.SerializerMethodField()
+  userName = serializers.SerializerMethodField()
   
-#   def get_userName(self,obj):
-#     return obj.user.username
+  def get_userName(self,obj):
+    return obj.user.username
 
   class Meta:
     model = Review
-    # fields = ('id', 'user', 'title', 'content', 'movie', 'rank', 'created_at', 'updated_at', 'movie_title')
-    fields = ('id', 'title')
-    # read_only_fields = ('user',)
+    fields = ('id', 'user', 'userName', 'title', 'content', 'movie', 'rank', 'created_at', 'updated_at', 'movie_title')
+    # fields = ('id', 'title')
+    read_only_fields = ('user',)
 
 # 리뷰의 댓글
 class ReviewCommentSerializer(serializers.ModelSerializer):
-    # userName = serializers.SerializerMethodField()
+    userName = serializers.SerializerMethodField()
 
-    # def get_userName(self,obj):
-    #     return obj.user.username
+    def get_userName(self,obj):
+        return obj.user.username
 
     class Meta:
         model = ReviewComment
-        # fields = ('id', 'userName', 'user', 'content', 'review', 'rank', 'created_at', 'updated_at',)
-        fields = ('id', 'content')
-        # read_only_fields = ('user', 'review',)
+        fields = ('id', 'userName', 'user', 'content', 'review', 'rank', 'created_at', 'updated_at',)
+        # fields = ('id', 'content')
+        read_only_fields = ('user', 'review',)
 

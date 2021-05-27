@@ -58,7 +58,7 @@ def article_update_or_delete(request, article_pk):
 @permission_classes([IsAuthenticated])
 def comment_list(request, article_pk):
     article = get_object_or_404(Article, pk=article_pk)
-    comments = article.comment_set.all()
+    comments = article.comments.all()
     serializer = CommentSerializer(comments, many=True)
     return Response(serializer.data)
 
@@ -79,11 +79,11 @@ def create_comment(request, article_pk):
 @permission_classes([IsAuthenticated])
 def comment_delete(request, article_pk, comment_pk):
     article = get_object_or_404(Article, pk=article_pk)
-    comment = article.comment_set.get(pk=comment_pk)
+    comments = article.comments.get(pk=comment_pk)
     if not request.user.comments.filter(pk=comment_pk).exists():
         return Response({'message': '접근 권한이 없습니다.'})
     else:
-        comment.delete()
+        comments.delete()
         return Response({'id': comment_pk})
 
 

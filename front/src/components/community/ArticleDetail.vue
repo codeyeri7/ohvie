@@ -1,4 +1,4 @@
-<template>
+<!--<template>
   <v-container>
     <v-card elevation="10" outlined width="100%" class="mx-auto">
       <v-card-title>
@@ -70,4 +70,4 @@ export default {
 
 <style>
 
-</style>
+</style>-->
