@@ -5,6 +5,7 @@ import ArticleView from '../views/community/ArticleView.vue'
 import ArticleList from '../components/community/ArticleList.vue'
 import ArticleCreate from '../components/community/ArticleCreate.vue'
 import DetailView from '../views/community/DetailView.vue'
+import ArticleDetailUpdate from '../views/community/ArticleDetailUpdate.vue'
 import Signup from '../views/accounts/Signup.vue'
 import Login from '../views/accounts/Login.vue'
 
@@ -43,10 +44,15 @@ const routes = [
     component: ArticleCreate
   },
   {
-    path: '/articledetail',
+    path: '/articledetail/:article_pk',
     name: 'ArticleDetail',
     component: DetailView
-  }
+  },
+  {
+    path: '/articleupdate/:article_pk',
+    name: 'ArticleUpdate',
+    component: ArticleDetailUpdate
+  },
 ]
 
 const router = new VueRouter({
