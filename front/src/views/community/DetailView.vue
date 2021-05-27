@@ -62,7 +62,7 @@
 
 <script>
 import axios from 'axios'
-// import VueJwtDecode from "vue-jwt-decode"
+import VueJwtDecode from "vue-jwt-decode"
 // const SERVER_URL = process.env.VUE_APP_SERVER_URL
 export default {
   name: 'DetailView',
@@ -101,18 +101,21 @@ export default {
         })    
     },
     // getMyName: function () {
-    //   const config = this.getToken()
-    //   const hash = localStorage.getItem('jwt')
-    //   const info = VueJwtDecode.decode(hash)
-    //   axios.post(`$http:127.0.0.1.8000:/community/myprofile/`, info, config)
-    //   .then( (res) => {
-    //     this.user = res.data
-    //     // console.log(this.user)
-    //   })
-    //   .catch( (err) => {
-    //     console.log(err)
-    //   })
+    //   this.user = res.data
     // },
+    getMyName: function () {
+      const config = this.getToken()
+      const hash = localStorage.getItem('jwt')
+      const info = VueJwtDecode.decode(hash)
+      axios.post(`http://127.0.0.1:8000/accounts/myprofile/`, info, config)
+      .then( (res) => {
+        this.user = res.data
+        // console.log(this.user)
+      })
+      .catch( (err) => {
+        console.log(err)
+      })
+    },
     getComments: function () {
       const config = this.getToken()
       const article_pk = this.$route.params.article_pk
@@ -165,17 +168,27 @@ export default {
           }
         })
     },
-    moveToDetailUpdate: function (article) {
-      const config = this.getToken()
-      axios.put(`http://127.0.0.1:8000/community/article/${article.id}/`, config)
-      .then((res) => {
-        if (res.data.message) {
-          this.$router.push({ name: 'CommunityDetailUpdate', params: { article_pk: `${article.id}` }})
-        } else {
-          alert("본인이 작성한 글만 수정 가능합니다!")
-        }
-      })
+     moveToDetailUpdate: function (article) {
+      console.log(this.user)
+      if (this.user.username === article.userName) {
+        console.log(article.id)
+        this.$router.push({ name: 'ArticleUpdate', params: { article_pk: `${article.id}` }})
+      } else {
+        alert("본인이 작성한 글만 수정 가능합니다!")
+      }
+      
     },
+    // moveToDetailUpdate: function (article) {
+    //   const config = this.getToken()
+    //   axios.put(`http://127.0.0.1:8000/community/article/${article.id}/`, config)
+    //   .then((res) => {
+    //     if (res.data.message) {
+    //       this.$router.push({ name: 'ArticleUpdate', params: { article_pk: `${article.id}` }})
+    //     } else {
+    //       alert("본인이 작성한 글만 수정 가능합니다!")
+    //     }
+    //   })
+    // },
     // moveToProfile: function (article) {
     //   // console.log(community.userName)
     //   this.$router.push({ name: "Profile", params: { user_pk: `${article.user}`, username: `${article.userName}` }})

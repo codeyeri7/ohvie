@@ -24,15 +24,15 @@
             </div>
           </div>
           <label style="margin-right: 15px" class="content-font" for="rank">내가 생각하는 영화 평점</label>
-          <!-- <div class="select-wrapper" style="margin-right: 15px; margin-bottom:15px">             -->
-            <StarRating v-bind:increment="0.5"
+          <div class="select-wrapper" style="margin-right: 15px; margin-bottom:15px">            
+            <!-- <StarRating v-bind:increment="0.5"
               v-bind:max-rating="10"
               v-bind:star-size="40"
-              v-bind:active-on-click="true"/>
-            <!-- <select name="rate" id="rate" v-model="myMovieRate" class="content-font">
+              v-bind:active-on-click="true"/> -->
+            <select name="rate" id="rate" v-model="myMovieRate" class="content-font">
               <option style="color: black;" class="content-font" :value="rate" v-for="(rate, idx) in this.$store.state.reviewRate" :key="idx">{{ rate }}</option>
-            </select> -->
-          <!-- </div> -->
+            </select>
+          </div>
           <div class="control-group">
             <div class="st-font form-group floating-label-form-group controls mb-0 pb-2">
               <label>리뷰 내용</label>
@@ -57,12 +57,11 @@
 
 <script>
 import axios from 'axios'
-import StarRating from 'vue-star-rating'
+// import StarRating from 'vue-star-rating'
 
 export default {
   name: "ReviewCreate",
   components: {
-    StarRating
   },
   props: {
     movie: {
@@ -74,7 +73,6 @@ export default {
       title: '',
       content: '',
       myMovieRate: 0,
-      rating: 0,
     }
   }, 
   methods: {
@@ -87,20 +85,20 @@ export default {
       }
       return config
     },
-    setRating: function(rating){
-      this.rating= rating;
-    },
+    // setRating: function(rating){
+    //   this.rating= rating;
+    // },
     createReview: function () {
       const config = this.getToken()
       const reviewItem = {
         title: this.title,
         content: this.content,
-        rank: this.rating,
+        rank: this.myMovieRate,
         movie: this.movie.id,
       }
       console.log(reviewItem)
       if (reviewItem.title) {
-        axios.post(`http:127.0.0.1:8000/community/${this.movie.id}/review_list_create/`, reviewItem, config)
+        axios.post(`http://127.0.0.1:8000/community/${this.movie.id}/review_list_create/`, reviewItem, config)
           .then(() => {
             this.$emit('reviews-updated')
             this.title = ""

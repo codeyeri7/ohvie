@@ -15,6 +15,7 @@ export default new Vuex.Store({
     eachMovie: {},
     // reviews: [],
     articles: [],
+    reviewRate: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
   },
   getters: {
     // reviews(state) {
