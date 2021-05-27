@@ -20,7 +20,6 @@
               </div>
                 <input type="password" placeholder="passwordConfirmation" id="passwordConfirmation" v-model="credentials.passwordConfirmation">
               </div>
-              <!-- <button @click="signup(credentials)">회원가입</button> -->
               <v-card-actions>
                 <v-btn @click="signup(credentials)" primary large block>회원가입</v-btn>
               </v-card-actions>
@@ -35,8 +34,6 @@
 
 <script>
 import axios from 'axios'
-
-// const SERVER_URL = process.env.VUE_APP_SERVER_URL
 
 export default {
   name: 'Signup',
@@ -59,8 +56,6 @@ export default {
         .then(res => {
           console.log(res)
           this.$router.push({ name: 'Login' })
-          // alret("좀되라좀!")
-          // this.$router.push({ name: 'Login' })
         })
         .catch(err => {
           console.log(err)

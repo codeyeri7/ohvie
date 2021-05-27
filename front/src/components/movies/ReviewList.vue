@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="title-font" style="margin-bottom:30px">Review List</h2>   
+    <h2 class="text-center" style="margin-bottom:30px">Review List</h2>   
     <ul>
       <div style="cursor:pointer;" v-for="(review, idx) in reviews" :key="idx">
         <MovieReviewDetail 

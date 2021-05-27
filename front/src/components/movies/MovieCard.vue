@@ -5,12 +5,13 @@
       width="500">
       <template v-slot:activator="{ on, attrs }">
         <v-card
-            :loading="loading"
-            class="card scale mx-auto"
-            style="width: 20rem;"
-            max-width="374"
-          >
+          :loading="loading"
+          class="card scale mx-auto"
+          style="width: 20rem;"
+          max-width="374"
+        >
           <v-img
+            class="align-center"
             height="500"
             :src="imageUrlMain"
             v-bind="attrs"
@@ -20,31 +21,29 @@
       </template>
     <!-- modal -->
     <v-card :id="`movie-${movieId}`">
-        <v-card-title class="headline grey lighten-2">
-          {{ movie.title }}
-        </v-card-title>
-
+      <v-card-title class="headline grey lighten-2">
+        <h3 class="text-center">{{ movie.title }}</h3>
+      </v-card-title>
         <v-card-text>
           <img :src="imageUrlDetail">
-          <v-btn icon v-if="isLiking" @click="like" style="color:crimson; text-align:center; margin-top:30px;" class="fas fa-heart"><v-icon>mdi-heart</v-icon></v-btn>
-          <v-btn icon v-else @click="like" style="font-size:60px; text-align:center; margin-top:30px;" class="far fa-heart"><v-icon>mdi-heart</v-icon></v-btn>
-          <p style="text-align:center; margin-top:5px">좋아요 {{ numLike }}개</p>
           <hr>
           <h5 style="margin-bottom:10px" class="title-font">영화 제목 : {{ movie.title }}</h5>
           <h5 style="margin-bottom:10px" class="content-font">평점 : {{ movie.vote_average }}점</h5>
           <h5 style="margin-bottom:10px" class="content-font">개봉 일자 : {{ movie.release_date }}</h5>
-          <h5 style="margin-bottom:10px" class="content-font">좋아요 {{ numLike }}개</h5>
           <hr>
           <span v-if="movie.overview">{{ movie.overview }}</span>
           <span v-else>해당 영화의 overview는 비어있습니다.</span>
           <hr>
-          <strong>읽고 싶은 책</strong>
+          <strong>[더 보고 싶은 영화]</strong>
+          <hr>
+          {{ movie.recommend }}
+          <hr>
+          <strong>[이 영화의 원작 소설]</strong>
           <hr>
           {{ movie.book_title }}
           <hr>
-          <a v-bind:href="movie.book_link">책좀 사볼까</a>
+          <a v-bind:href="movie.book_link">책 좀 사볼까? [HERE]</a>
         </v-card-text>
-
         <v-divider></v-divider>
         <MovieReview 
           :movie="movie"
@@ -68,7 +67,6 @@
 import MovieReview from '@/components/movies/MovieReview'
 import axios from 'axios'
 import VueJwtDecode from "vue-jwt-decode"
-
 
 export default {
   name: 'MovieCard',
@@ -170,14 +168,4 @@ export default {
 </script>
 
 <style>
-#heart {
-  display: block;
-  margin: 0px auto;
-  cursor: pointer;
-  -webkit-transition-duration: 0.4s;
-  transition-duration: 0.4s;
-}
-#heart:hover {
-  color: crimson;
-}
 </style>

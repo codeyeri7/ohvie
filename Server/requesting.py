@@ -8,7 +8,7 @@ movies = []
 
 
 # 500page까지만 요청 가능(10000개 데이터) 1page~500page
-for i in range(1, 30):
+for i in range(1, 50):
     URL = (f'https://api.themoviedb.org/3/movie/popular?api_key={API_KEY}&language=ko-KR&page={i}')
     response = requests.get(URL)
     data = response.json()
@@ -47,6 +47,8 @@ for i in range(1, 30):
         RECOMMEND_URL = (f'https://api.themoviedb.org/3/movie/{movie_id}/recommendations?api_key={API_KEY}&language=ko-KR')
         recommend_response = requests.get(RECOMMEND_URL)
         recommend_data = recommend_response.json()
+        # print(recommend_data.get('results')[0].get('title'))
+        # print()
         try:
             for j in range(3):
                 # temp_dict['recommend'].append(recommend_data.get('results')[j].get('title'))
@@ -59,16 +61,19 @@ for i in range(1, 30):
                 for k in range(len(keyword_data)):
                     # print(keyword_data[k].get('id'), keyword_data[k].get('name'))
                     if keyword_data[k].get('id') == 818:
+                        # print(keyword_data)
                         if keyword_data[0].get('id') == 818:
-                            temp_dict['recommend'] = keyword_data[1].get('name')
+                            temp_dict['recommend'] = recommend_data.get('results')[0].get('title')
+                            # print(keyword_data[1].get('title'))
                         else:
-                            temp_dict['recommend'] = keyword_data[0].get('name')
+                            temp_dict['recommend'] = recommend_data.get('results')[0].get('title')
         except:
             continue
         
 
         if temp_dict.get('recommend'):
-            original_title = temp_dict.get('title')
+            # original_title = temp_dict.get('title')
+            original_title = temp_dict.get('recommend')
             original_title = original_title.replace(' ', '')
             # print(original_title)
             BOOK_URL = (f'http://book.interpark.com/api/search.api?key=0CA17E2093AF4A55305F3AB7ECAA6A16517D8B64D9B9630B9A8D010573B88FE0&query={original_title}&output=json')

@@ -1,10 +1,9 @@
 <template>
-  <div class="container">
-    <!-- <h1 @click="fetchAllMovies">MOVIES LIST</h1> -->
-    <div class="row">
+  <v-container>
+    <v-row>
       <MovieCard v-for="(movie, idx) in allMovies" :key='idx' :movie='movie' class='col-12 col-md-6 col-lg-3'/>
-    </div>
-  </div>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
@@ -20,7 +19,6 @@ export default {
   computed: {
     ...mapState(['allMovies'])
   }
-
 }
 </script>
 

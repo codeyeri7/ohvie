@@ -19,7 +19,6 @@ import ReviewList from '@/components/movies/ReviewList'
 import ReviewCreate from '@/components/movies/ReviewCreate.vue'
 import axios from 'axios'
 
-
 export default {
   name: 'Review',
   components: {

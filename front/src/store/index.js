@@ -7,27 +7,16 @@ import DRF from '@/api/drf'
 
 Vue.use(Vuex)
 
-// API_KEY = 'f4e4ad237c7fb44ea8e4abb88193fa30'
-
 export default new Vuex.Store({
   state: {
     allMovies: [],
     eachMovie: {},
-    // reviews: [],
     articles: [],
     reviewRate: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
   },
-  getters: {
-    // reviews(state) {
-    //   return state.reviews
-    // }
-  //   imageUrl: (state) => "https://image.tmdb.org/t/p/w500" + state.eachMovie,
-  },
-
   mutations: {
     SET_ALLVIDEOS: (state, movies) => { state.allMovies = movies},
     SET_EACH_MOVIE: (state, movie) => { state.eachMovie = movie },
-    // SET_REVIEWS: (state, reviews) => state.reviews = reviews,
     CREATE_Detail_Article(state, article) {
       state.articles.push(article)
     },
@@ -53,11 +42,6 @@ export default new Vuex.Store({
     createReview({ commit }, review) {
       commit('CREATE_REVIEW', review)
     }
-  //   createReview ({ getters }, reviewData) {
-  //     axios.post(DRF.URL + DRF.ROUTES.reviews, reviewData, getters.config)
-  //       .then(() => router.push({ name: 'ReviewList' }))
-  //       .catch(err => console.error(err))
-  // }
   },
   modules: {
   }

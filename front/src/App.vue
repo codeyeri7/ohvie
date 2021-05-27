@@ -56,7 +56,6 @@ export default {
   },
   created: function () {
     this.fetchAllMovies()
-    
     const token = localStorage.getItem('jwt')
     if (token) {
       this.isLogin = true
