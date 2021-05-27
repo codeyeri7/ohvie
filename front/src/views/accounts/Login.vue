@@ -1,15 +1,29 @@
 <template>
-  <div>
-    <h1>Login</h1>
-    <div>
-      <label for="username">사용자 이름: </label>
-      <input type="text" id="username" v-model="credentials.username">
-    </div>
-    <div>
-      <label for="password">비밀번호: </label>
-      <input type="password" id="password" v-model="credentials.password">
-    </div>
-    <button @click="login">로그인</button>
+
+  <div id="app">
+    <v-container>
+      <v-layout row class="text-xs-center">
+        <v-flex xs4 class="white lighten-4">
+          <v-container style="position: relative; top: 20%; left: 100%;" class="text-xs-center">
+            <v-card flat>
+              <v-card-title primary-title>
+                <h4>Login</h4>
+              </v-card-title>
+              <v-form>
+               <input type="text" placeholder="username" id="username" v-model="credentials.username" v-text-field prepend-icon="person" name="Username" label="Username" />
+              <div>
+                  -----------------------------------------------
+              </div>
+              <input type="password" placeholder="password" id="password" v-model="credentials.password" v-text-field prepend-icon="lock" name="Password" label="Password" />
+              <v-card-actions>
+                <v-btn @click="login" primary large block>Login</v-btn>
+              </v-card-actions>
+              </v-form>
+            </v-card>
+          </v-container>
+        </v-flex>
+      </v-layout>
+    </v-container>
   </div>
 </template>
 
@@ -44,18 +58,6 @@ export default {
         .catch(err => {
           console.log(err)
         })
-        // .then( (res) => {
-        //   localStorage.setItem('jwt', res.data.token)
-        //   console.log(res.data.token)
-        //   console.log(res.data)
-        //   // 로그인 버튼을 누르면 위로 연결될 수 있게 emit
-        //   this.$emit('login')
-        //   this.$router.push({ name: 'Main' })
-        // })
-        // .catch(err => {
-        //   alert('잘못입력햇네')
-        //   console.log(err)
-        // })
     }
   }
 }

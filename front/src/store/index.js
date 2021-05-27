@@ -14,6 +14,7 @@ export default new Vuex.Store({
     allMovies: [],
     eachMovie: {},
     // reviews: [],
+    articles: [],
   },
   getters: {
     // reviews(state) {
@@ -25,7 +26,13 @@ export default new Vuex.Store({
   mutations: {
     SET_ALLVIDEOS: (state, movies) => { state.allMovies = movies},
     SET_EACH_MOVIE: (state, movie) => { state.eachMovie = movie },
-    SET_REVIEWS: (state, reviews) => state.reviews = reviews
+    // SET_REVIEWS: (state, reviews) => state.reviews = reviews,
+    CREATE_Detail_Article(state, article) {
+      state.articles.push(article)
+    },
+    CREATE_REVIEW(state, review) {
+      state.review.push(review)
+    }
   },
   actions: {
     fetchAllMovies({commit}) {
@@ -34,20 +41,17 @@ export default new Vuex.Store({
       .then(res => commit('SET_ALLVIDEOS', res.data))
       .catch(err => console.error(err))
     },
-    selectMovie({ commit }, movieId) {
-      const URL = 'http://127.0.0.1:8000/movies/' + movieId +'/'
-      console.log('axios 보내기전')
-      axios.get(URL)
-      .then(res => {
-        commit('SET_EACH_MOVIE', res.data)
-        console.log('반환러ㅑ햐허')
-      }) 
-    },
     fetchReviews({ commit }) {
       axios.get(DRF.URL + DRF.ROUTES.reviews)
         .then(res => commit('SET_REVIEWS', res.data))
         .catch(err => console.error(err))
     },
+    createDetatilArticle({ commit }, article) {
+      commit('CREATE_Detail_Article',  article)
+    },
+    createReview({ commit }, review) {
+      commit('CREATE_REVIEW', review)
+    }
   //   createReview ({ getters }, reviewData) {
   //     axios.post(DRF.URL + DRF.ROUTES.reviews, reviewData, getters.config)
   //       .then(() => router.push({ name: 'ReviewList' }))

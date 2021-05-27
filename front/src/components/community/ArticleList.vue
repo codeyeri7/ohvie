@@ -1,4 +1,4 @@
-<template>
+<!--<template>
   <v-container>
     <v-card elevation="10" outlined width="100%" class="mx-auto">
       <v-card-title>
@@ -28,7 +28,7 @@
       </v-data-table>
     </v-card>
   </v-container>
-</template>
+</template> -->
 
 <!--<template>
   <div>
@@ -41,6 +41,7 @@
   </div>
 </template>-->
 
+<!--
 <script>
 import axios from 'axios'
 
@@ -134,4 +135,85 @@ export default {
     text-decoration: line-through;
     color: rgb(112, 112, 112);
   }
+</style>
+-->
+
+<template>
+  <div>
+  <div class="container">
+    <h2 class="st-font" style="margin-bottom:30px">Community</h2>
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="post-preview" style="cursor:pointer;" v-for="(article, idx) in articles" :key="idx">
+          <h3 class="title-font" @click="DetailArticle(article)">{{article.id}}번 글</h3>
+          <h2 class="title-font" @click="DetailArticle(article)">
+            {{ article.title }}
+          </h2>
+          <h4 class="content-font">
+            {{ article.content }}
+          </h4>
+          <p>
+            {{ article.userName }}
+          </p>
+        <hr>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </div>
+</template>
+
+
+<script>
+import axios from 'axios'
+
+export default {
+  name: 'ArticleList',
+  data: function () {
+    return {
+      articles: null,
+    }
+  },
+
+  // props: {
+  //   articles: [Array, Object]
+  // },
+  methods: {
+    DetailArticle: function (article) {
+      this.$router.push({ name: 'ArticleDetail', params: { article_pk: `${article.id}` }})
+    },  
+    getToken: function () {
+      const token = localStorage.getItem('jwt')
+      const config = {
+        Authorization: `JWT ${token}`
+      }
+      return config
+    },
+    getArticles: function() {
+      axios({
+        method: 'get',
+        url: 'http://127.0.0.1:8000/community/articles/',
+        headers: this.getToken()
+      })
+        .then((res) => {
+          console.log(res)
+          this.articles = res.data
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+  },
+  created: function () {
+    if (localStorage.getItem('jwt')) {
+      this.getArticles()
+    } else {
+      this.$router.push({name: 'Login'})
+    }
+  }
+}
+</script>
+
+<style>
 </style>

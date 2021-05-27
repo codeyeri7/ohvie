@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Main from '../views/movies/Main.vue'
-import CreateView from '../views/community/CreateView.vue'
-import ListView from '../views/community/ListView.vue'
+import ArticleView from '../views/community/ArticleView.vue'
+import ArticleList from '../components/community/ArticleList.vue'
+import ArticleCreate from '../components/community/ArticleCreate.vue'
 import DetailView from '../views/community/DetailView.vue'
 import Signup from '../views/accounts/Signup.vue'
 import Login from '../views/accounts/Login.vue'
@@ -27,14 +28,19 @@ const routes = [
     component: Login,
   },
   {
-    path: '/articlecreate',
-    name: 'ArticleCreate',
-    component: CreateView
+    path: '/articleview',
+    name: 'ArticleView',
+    component: ArticleView
   },
   {
     path: '/articlelist',
     name: 'ArticleList',
-    component: ListView
+    component: ArticleList
+  },
+  {
+    path: '/articlecreate',
+    name: 'ArticleCreate',
+    component: ArticleCreate
   },
   {
     path: '/articledetail',

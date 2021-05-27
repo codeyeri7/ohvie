@@ -1,10 +1,10 @@
 <template>
-  <section class="container">
-    <h1 @click="fetchAllMovies">MOVIES LIST</h1>
+  <div class="container">
+    <!-- <h1 @click="fetchAllMovies">MOVIES LIST</h1> -->
     <div class="row">
-        <MovieCard v-for="(movie, idx) in allMovies" :key='idx' :movie='movie' class='col-12 col-md-6 col-lg-3 my-3'/>
+      <MovieCard v-for="(movie, idx) in allMovies" :key='idx' :movie='movie' class='col-12 col-md-6 col-lg-3'/>
     </div>
-  </section>
+  </div>
 </template>
 
 <script>
