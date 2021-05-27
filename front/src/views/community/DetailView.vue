@@ -1,15 +1,16 @@
 <template>
   <div>
-    <ReviewDetail />
+    <ArticleDetail />
   </div>
 </template>
 
 <script>
-import ReviewDetail from '../../components/community/ReviewDetail.vue'
+import ArticleDetail from '../../components/community/ArticleDetail.vue'
+
 export default {
   name: 'DetailView',
   components: {
-    ReviewDetail
+    ArticleDetail
   }
 }
 </script>

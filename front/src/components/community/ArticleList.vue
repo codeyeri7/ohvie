@@ -2,7 +2,7 @@
   <v-container>
     <v-card elevation="10" outlined width="100%" class="mx-auto">
       <v-card-title>
-        MovieReview
+        Community
           <v-spacer></v-spacer>
           <v-text-field
           v-model="search"

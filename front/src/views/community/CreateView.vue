@@ -1,16 +1,16 @@
 <template>
   <div>
-    <ReviewCreate />
+    <ArticleCreate />
   </div>
 </template>
 
 <script>
-import ReviewCreate from '../../components/community/ReviewCreate.vue'
+import ArticleCreate from '../../components/community/ArticleCreate.vue'
 
 export default {
   name: 'CreateView',
   components: {
-    ReviewCreate
+    ArticleCreate
   }
 }
 </script>
